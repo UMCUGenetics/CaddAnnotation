@@ -22,7 +22,35 @@ Usage: python CADDtoAnno_chunkscript.py -db <database_name> -v <input_vcf> -o <o
 -td     Location of temp directory: default is current working directory
 ```
 
-## Example
+#### Example
 ```
 python /path/to/chunkscript/CADDtoAnno_chunkscript.py -v /path/to/inputvcf/test.vcf -o /path/to/outputvcf/testoutput.vcf -t 1 -m example@mail.com
+```
+
+# CADD report (runs locally)
+## Setup
+```
+cd cadd-report
+virtualenv env
+. env/bin/activate
+```
+
+## Additional requirements for using the report script
+```
+reportlab==3.3.0
+pymongo==3.2.2
+matplotlib==1.5.1
+pyPdf==1.13
+```
+
+Requires the use of a running [vcf-explorer](https://github.com/CuppenResearch/vcf-explorer).
+
+## Usage
+```
+python CADD_report.py -sample <sample_name>
+```
+
+#### Example
+```
+python CADD_report.py -sample AB12345
 ```
