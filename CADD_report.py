@@ -8,7 +8,6 @@ from pyPdf import PdfFileWriter, PdfFileReader
 from reportlab.lib import colors
 
 import pymongo
-import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import StringIO
@@ -70,7 +69,7 @@ def countCategories(search_one):
     data = []
     index = 0
     for element in count:
-        if search_one == "$info.CADD.CADDv1-3_Segway":
+        if search_one == "$info.CADDv1-3.CADDv1-3_Segway":
             data.append([element["_id"], segway_descr[element["_id"]], str(element["count"])])
             index += 1
         else:
@@ -88,7 +87,7 @@ def countHighPhred():
     # Then all variants with a PHRED above 25 were selected and counted
     pipeline = [
         {"$match": {"samples.sample": args.sample}},
-        {"$match": {"info.CADD.CADDv1-3_PHRED": {"$gt": 25}}},
+        {"$match": {"info.CADDv1-3.CADDv1-3_PHRED": {"$gt": 25}}},
         {"$group": {"_id": "PHRED", "count": {"$sum": 1}}}
         ]
     count = list(db.variants.aggregate(pipeline, allowDiskUse=True))
@@ -108,7 +107,8 @@ This function counts the amount of variants with a proportion of at least 0.75 o
 It returns the table title and the table data.
 """
 def countCHMM():
-    chmm_cats = ["info.CADD.CADDv1-3_cHmmTssA", "info.CADD.CADDv1-3_cHmmTssAFlnk", "info.CADD.CADDv1-3_cHmmTxFlnk", "info.CADD.CADDv1-3_cHmmTx", "info.CADD.CADDv1-3_cHmmTxWk",          "info.CADD.CADDv1-3_cHmmEnhG", "info.CADD.CADDv1-3_cHmmEnh", "info.CADD.CADDv1-3_cHmmZnfRpts","info.CADD.CADDv1-3_cHmmHet", "info.CADD.CADDv1-3_cHmmTssBiv", "info.CADD.CADDv1-3_cHmmBivFlnk", "info.CADD.CADDv1-3_cHmmEnhBiv", "info.CADD.CADDv1-3_cHmmReprPC", "info.CADD.CADDv1-3_cHmmReprPCWk", "info.CADD.CADDv1-3_cHmmQuies"]
+    chmm_cats = ["info.CADDv1-3.CADDv1-3_cHmmTssA", "info.CADDv1-3.CADDv1-3_cHmmTssAFlnk", "info.CADDv1-3.CADDv1-3_cHmmTxFlnk", "info.CADDv1-3.CADDv1-3_cHmmTx", "info.CADDv1-3.CADDv1-3_cHmmTxWk", "info.CADDv1-3.CADDv1-3_cHmmEnhG", "info.CADDv1-3.CADDv1-3_cHmmEnh",
+    "info.CADDv1-3.CADDv1-3_cHmmZnfRpts","info.CADDv1-3.CADDv1-3_cHmmHet", "info.CADDv1-3.CADDv1-3_cHmmTssBiv", "info.CADDv1-3.CADDv1-3_cHmmBivFlnk", "info.CADDv1-3.CADDv1-3_cHmmEnhBiv", "info.CADDv1-3.CADDv1-3_cHmmReprPC", "info.CADDv1-3.CADDv1-3_cHmmReprPCWk", "info.CADDv1-3.CADDv1-3_cHmmQuies"]
 
     chmm_descr = {"cHmmTssA" : "Active Transcription Start Site", "cHmmTssAFlnk" : "Flanking Active Transcription Start Site", "cHmmTxFlnk" : "Transcription at gene 5' and 3'",
                   "cHmmTx" : "Strong transcription", "cHmmTxWk" : "Weak transcription", "cHmmEnhG" : "Genic enhancers", "cHmmEnh" : "Enhancers", "cHmmZnfRpts" : "ZNF genes & repeats", "cHmmHet" : "Heterochromatin", "cHmmTssBiv" : "Bivalent/Poised Transcription Start Site", "cHmmBivFlnk" : "Flanking Bivalent Transcription Start Site/Enhancer",
@@ -182,7 +182,7 @@ def plots():
     bashcsv = open("./csv_data.sh", "w")
     bashcsv.write("cd ../mongodb-linux-x86_64-3.2.4/bin/")
     bashcsv.write("\n")
-    bashcsv.write("./mongoexport --db vcf_explorer --collection variants --type=csv --fields info.CADD.CADDv1-3_ConsDetail,info.CADD.CADDv1-3_PHRED --out /home/sverduin/data/mongoexport.csv")
+    bashcsv.write("./mongoexport --db vcf_explorer --collection variants --type=csv --fields info.CADDv1-3.CADDv1-3_ConsDetail,info.CADDv1-3.CADDv1-3_PHRED --out /home/sverduin/data/mongoexport.csv")
     bashcsv.close()
 
     os.system("bash ./csv_data.sh")
@@ -279,7 +279,7 @@ def go():
     indels_story = Paragraph(indels, style)
     phred_story = Paragraph(countHighPhred(), style)
 
-    cons_data, cons_title = countCategories("$info.CADD.CADDv1-3_ConsDetail")
+    cons_data, cons_title = countCategories("$info.CADDv1-3.CADDv1-3_ConsDetail")
     custom_data = customEnsembl()
     coding = ["splice_synonymous", "synonymous", "missense_splice_NMD", "missense_splice", "stop_gained_NMD", "stop_gained_splice",
               "stop_retained", "missense", "incomplete_terminal_codon_coding_sequence", "stop_lost", "splice_synonymous_NMD",
@@ -326,7 +326,7 @@ def go():
         other_story = Paragraph(others, style)
 
     # Table title and table data is retrieved
-    segway_data, segway_title = countCategories("$info.CADD.CADDv1-3_Segway")
+    segway_data, segway_title = countCategories("$info.CADDv1-3.CADDv1-3_Segway")
     chmm_data, chmm_title = countCHMM()
 
     # Table title are converted to a paragraph
@@ -356,6 +356,7 @@ def go():
     ]
 
     # Creates for each table data an actual table with chosen table style
+    print cons_data
     cons_table=Table(cons_data2)
     cons_table.setStyle(table_style)
     segway_table=Table(segway_data2)
