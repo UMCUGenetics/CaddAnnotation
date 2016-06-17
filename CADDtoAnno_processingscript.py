@@ -6,7 +6,6 @@ from helper import deep_update
 import getopt, sys, argparse, os
 
 """
-SHIRA VERDUIN
 This program reads in a VCF and (CADD)database and annotates the VCF using the database.
 """
 
