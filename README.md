@@ -1,8 +1,10 @@
 # CaddAnnotation
+The CADD annotation pipeline annotates the contents of a tab-delimted database into an input VCF (in the INFO field).
 
 ## Setup
 ```
-cd vcf-explorer
+git@github.com:CuppenResearch/CaddAnnotation.git
+cd CaddAnnotation
 virtualenv env
 . env/bin/activate
 
@@ -28,6 +30,9 @@ python /path/to/chunkscript/CADDtoAnno_chunkscript.py -v /path/to/inputvcf/test.
 ```
 
 # CADD report (runs locally)
+Creates a CADD report that counts the total number of variants and the number of variants in functional categories.
+Creates for each category a boxplot with the distribution of the CADD PHRED-score.
+
 ## Setup
 ```
 cd cadd-report
