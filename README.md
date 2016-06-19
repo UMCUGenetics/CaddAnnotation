@@ -29,6 +29,20 @@ Usage: python CADDtoAnno_chunkscript.py -db <database_name> -v <input_vcf> -o <o
 python /path/to/chunkscript/CADDtoAnno_chunkscript.py -v /path/to/inputvcf/test.vcf -o /path/to/outputvcf/testoutput.vcf -t 1 -m example@mail.com
 ```
 
+#### Usage without the use of chunking
+```
+Usage: python CADDtoAnno_processingscript.py -db <database_name> -v <input_vcf> -o <output_vcf>
+
+-db     Input database: default is CADD SNVs version 1.3
+-v      Input VCF
+-o      Output VCF
+```
+
+#### Example
+```
+python /path/to/processingscript/CADDtoAnno_processingscript.py -v /path/to/inputvcf/test.vcf -o /path/to/outputvcf/testoutput.vcf
+```
+
 # CADD report (runs locally)
 Creates a CADD report that counts the total number of variants and the number of variants in functional categories.
 Creates for each category a boxplot with the distribution of the CADD PHRED-score.
