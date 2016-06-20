@@ -1,5 +1,6 @@
 # CaddAnnotation
 The CADD annotation pipeline annotates the contents of a tab-delimted database into an input VCF (in the INFO field).
+The chunkscript is used to run the annotation script in parallel, to annotate faster.
 
 ## Setup
 ```
@@ -49,7 +50,7 @@ Creates for each category a boxplot with the distribution of the CADD PHRED-scor
 
 ## Setup
 ```
-cd cadd-report
+cd CaddAnnotation
 virtualenv env
 . env/bin/activate
 ```
