@@ -1,0 +1,174 @@
+DE NOVO D4
+-------
+$ java -Xmx8g -jar SnpSift.jar filter "(isVariant( GEN[2015D13012] ) &  GEN[2015D13009].GT = '0/0' & GEN[2015D13010].GT = '0/0' & GEN[2015D13011].GT = '0/0' & GEN[NGS140088].GT = '0/0' )" ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4.vcf | egrep -cv ^"#"
+42782
+
+$ java -jar SnpSift.jar filter "(( dbNSFP_ExAC_AF[*] < 0.05 ) | ( exists ! dbNSFP_ExAC_AF[*] )) & (( GoNLv5_AF[*] < 0.05 ) | ( exists ! GoNLv5_AF[*] ))" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq.vcf | egrep -cv ^"#"
+42204
+
+$ java -Xmx8g -jar SnpSift.jar filter "(GEN[ALL].DP > 10 )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10.vcf | egrep -cv ^"#"
+26361
+
+$ java -Xmx8g -jar SnpSift.jar filter "( FILTER = 'PASS'  )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS.vcf | egrep -cv ^"#"
+7359
+
+$ java -Xmx8g -jar SnpSift.jar filter "( GEN[ALL].GQ > 30 )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS.vcf | egrep -cv  ^"#"
+1226
+
+$ java -Xmx8g -jar SnpSift.jar filter "( GEN[ALL].GQ > 30 )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30.vcf | egrep -cv ^"#"
+1226
+
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_2.5k.bed > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf | egrep -cv ^"#"
+75
+
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_5k.bed > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf | egrep -cv ^"#"
+120
+
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf | java -jar SnpSift.jar intervals ~/data/pt13012specificdenovos_eyeballed_regions.bed > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5_IGV.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5_IGV.vcf | egrep -cv ^"#"
+2
+
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf | java -jar SnpSift.jar intervals ~/data/pt13012specificdenovos_eyeballed_regions.bed > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno5_IGV.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD4_LowPopFreq_DP10_PASS_GQ30_Immuno5_IGV.vcf | egrep -cv ^"#"
+4
+
+DE NOVO D3
+---------
+$ java -Xmx8g -jar SnpSift.jar filter "(isVariant( GEN[NGS140088] ) &  GEN[2015D13009].GT = '0/0' & GEN[2015D13010].GT = '0/0' & GEN[2015D13011].GT = '0/0' & GEN[2015D13012].GT = '0/0' )" ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3.vcf
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3.vcf | egrep -cv ^"#" 
+47028
+
+$ java -jar SnpSift.jar filter "(( dbNSFP_ExAC_AF[*] < 0.05 ) | ( exists ! dbNSFP_ExAC_AF[*] )) & (( GoNLv5_AF[*] < 0.05 ) | ( exists ! GoNLv5_AF[*] ))" MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq.vcf
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq.vcf | egrep -cv ^"#"
+46407
+
+$ java -Xmx8g -jar SnpSift.jar filter "(GEN[ALL].DP > 10 )" MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10.vcf   
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10.vcf | egrep -cv ^"#"
+34185
+
+$ java -Xmx8g -jar SnpSift.jar filter "( FILTER = 'PASS'  )" MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS.vcf
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS.vcf | egrep -cv ^"#"
+8484
+
+$ java -Xmx8g -jar SnpSift.jar filter "( GEN[ALL].GQ > 30 )" MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30.vcf 
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30.vcf | egrep -cv ^"#"
+3054
+
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_2.5k.bed > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf | egrep -cv ^"#"
+141
+
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_5k.bed > MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DenovoD3_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf | egrep -cv ^"#"
+226
+
+RECESSIVE D4
+---------
+$ java -Xmx8g -jar SnpSift.jar filter "( isHom( GEN[2015D13012] ) & isVariant( GEN[2015D13012] )) & ( isHet( GEN[2015D13009] ) & isHet( GEN[2015D13010] )) & ( GEN[2015D13011].GT = '0/0' | isHet( GEN[2015D13011] )) & ( GEN[NGS140088].GT = '0/0' | isHet( GEN[NGS140088] )) "  ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4.vcf | egrep -cv ^"#"
+133255
+
+$ java -jar SnpSift.jar filter "(( dbNSFP_ExAC_AF[*] < 0.05 ) | ( exists ! dbNSFP_ExAC_AF[*] )) & (( GoNLv5_AF[*] < 0.05 ) | ( exists ! GoNLv5_AF[*] ))" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq.vcf | egrep -cv ^"#"
+31377
+
+$ java -Xmx8g -jar SnpSift.jar filter "(GEN[ALL].DP > 10 )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10.vcf
+$ cat  ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10.vcf | egrep -cv ^"#"
+15806
+
+$ java -Xmx8g -jar SnpSift.jar filter "( FILTER = 'PASS'  )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS.vcf | egrep -cv ^"#"
+14499
+
+$ java -Xmx8g -jar SnpSift.jar filter "( GEN[ALL].GQ > 30 )" ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS.vcf > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30.vcf | egrep -cv ^"#"
+11090
+
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_2.5k.bed > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf | egrep -cv ^"#"
+769
+
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_5k.bed > ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf | egrep -cv ^"#"
+1297
+
+RECESSIVE D3
+---------
+$ java -Xmx8g -jar SnpSift.jar filter "( isHom( GEN[NGS140088] ) & isVariant( GEN[NGS140088] )) & ( isHet( GEN[2015D13009] ) & isHet( GEN[2015D13010] )) & ( isHom( GEN[2015D13011] ) & GEN[2015D13011].GT = '0/0' |  isHet( GEN[2015D13011] )) & ( isHom( GEN[2015D13012] ) & GEN[2015D13012].GT = '0/0' | isHet( GEN[2015D13012] )) " ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype.vcf > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3.vcf | egrep -cv ^"#"
+168110
+
+$ java -jar SnpSift.jar filter "(( dbNSFP_ExAC_AF[*] < 0.05 ) | ( exists ! dbNSFP_ExAC_AF[*] )) & (( GoNLv5_AF[*] < 0.05 ) | ( exists ! GoNLv5_AF[*] ))" ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3.vcf > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq.vcf | egrep -cv ^"#"
+48029
+
+$ java -Xmx8g -jar SnpSift.jar filter "(GEN[ALL].DP > 10 )" ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq.vcf > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10.vcf | egrep -cv ^"#"
+20503
+
+$ java -Xmx8g -jar SnpSift.jar filter "( FILTER = 'PASS'  )" ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10.vcf > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS.vcf 
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS.vcf | egrep -cv ^"#"
+18986
+
+$ java -Xmx8g -jar SnpSift.jar filter "( GEN[ALL].GQ > 30 )" ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS.vcf > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.vcf | egrep -cv ^"#"
+15554
+
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_2.5k.bed > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30_Immuno2.5.vcf | egrep -cv ^"#"
+1400
+
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals ~/data/ImmunoProbes_gappedPassedProbes_5k.bed > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30_Immuno5.vcf | egrep -cv ^"#"
+2261
+
+DIFFERENCE RECESSIVE D3/D4
+---------
+$ java -jar SnpSift.jar extractFields ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.vcf CHROM POS POS > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.bed
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_LowPopFreq_DP10_PASS_GQ30.vcf | java -jar SnpSift.jar intervals -x ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_LowPopFreq_DP10_PASS_GQ30.bed > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DiffD3D4.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DiffD3D4.vcf | egrep -cv ^"#"
+11090
+
+DIFFERENCE SPLICING D3/D4
+---------
+$ java -jar SnpSift.jar extractFields ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_Splice.vcf CHROM POS POS > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_Splice.bed
+$ cat ~/data/Fam/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD4_Splice.vcf | java -jar SnpSift.jar intervals -x ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_RecessiveD3_Splice.bed > ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DiffSpliceD3D4.vcf
+$ cat ~/data/MvG_SnpEff_SnpSift_GoNL_CADD_EnsemblBiotype_DiffSpliceD3D4.vcf | egrep -cv ^"#"
+115
+
+VARIANTS COMPARED WITH SPLICING-ASSOCIATED GENES
+---------
+Recessive D4 splice-associated variants
+$ java -Xmx8g -jar SnpSift.jar filter "(ANN[*].GENE = 'CELF1') | (ANN[*].GENE = 'GULP1') | (ANN[*].GENE = 'HNRNPA1') | (ANN[*].GENE = 'HNRNPA2B1') | (ANN[*].GENE = 'HNRNPF') | (ANN[*].GENE = 'HNRNPH1') | (ANN[*].GENE = 'HNRNPM') | (ANN[*].GENE = 'HNRNPU') | (ANN[*].GENE = 'MBNL1') | (ANN[*].GENE = 'NOVA1') | (ANN[*].GENE = 'RBFOX1') | (ANN[*].GENE = 'SRSF1') | (ANN[*].GENE = 'SRSF2') | (ANN[*].GENE = 'SRSF3') | (ANN[*].GENE = 'SRSF6') | (ANN[*].GENE = 'SRSF7') | (ANN[*].GENE = 'TIA1') | (ANN[*].GENE = 'TRA2A') | (ANN[*].GENE = 'TRA2B') | (ANN[*].GENE = 'YBX1') | (ANN[*].GENE = 'SKI')" MvG_SnpEff_SnpSift_GoNL_CADD_RecessiveD4.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_RecessiveD4_Splice.vcf
+113 
+
+De novo D4 splice-associated variants
+$ java -Xmx8g -jar SnpSift.jar filter "(ANN[*].GENE = 'CELF1') | (ANN[*].GENE = 'GULP1') | (ANN[*].GENE = 'HNRNPA1') | (ANN[*].GENE = 'HNRNPA2B1') | (ANN[*].GENE = 'HNRNPF') | (ANN[*].GENE = 'HNRNPH1') | (ANN[*].GENE = 'HNRNPM') | (ANN[*].GENE = 'HNRNPU') | (ANN[*].GENE = 'MBNL1') | (ANN[*].GENE = 'NOVA1') | (ANN[*].GENE = 'RBFOX1') | (ANN[*].GENE = 'SRSF1') | (ANN[*].GENE = 'SRSF2') | (ANN[*].GENE = 'SRSF3') | (ANN[*].GENE = 'SRSF6') | (ANN[*].GENE = 'SRSF7') | (ANN[*].GENE = 'TIA1') | (ANN[*].GENE = 'TRA2A') | (ANN[*].GENE = 'TRA2B') | (ANN[*].GENE = 'YBX1') | (ANN[*].GENE = 'SKI')" MvG_SnpEff_SnpSift_GoNL_CADD_DenovoD4.vcf > MvG_SnpEff_SnpSift_GoNL_CADD_DenovoD4_Splice.vcf
+35
+
+De novo specific eyeballed regions
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_DenovoD4.vcf | java -jar SnpSift.jar intervals ~/data/pt13012specificdenovos_eyeballed_regions.bed > MvG_SnpEff_SnpSift_GoNL_CADD_DenovoD4_SpecRegions.vcf
+53
+
+CREATE IMMUNOCHIP FLANKING POSITIONS
+---------
+Sort data on immunochip
+$ cat ImmunoProbes_gappedPassedProbes.bed | sort -V > ImmunoProbes_gappedPassedProbes_sort.bed
+
+2500 bases before and after position on immunoprobe chip
+$ cat ImmunoProbes_gappedPassedProbes_sort.bed | awk '{print ($1) "\t" ($2-2500) "\t" ($3+2500)}' > ImmunoProbes_gappedPassedProbes_2.5k.bed
+
+5000 bases before and after position on immunoprobe chip
+$ cat ImmunoProbes_gappedPassedProbes_sort.bed | awk '{print ($1) "\t" ($2-5000) "\t" ($3+5000)}' > ImmunoProbes_gappedPassedProbes_2.5k.bed
+
+VARIANTS SURROUNDING DOCK8 GENE
+---------
+Variants flanking 10kb of DOCK8 gene
+$ cat MvG_SnpEff_SnpSift_GoNL_CADD_RecessiveD4_LowPopFreq.vcf | java -jar SnpSift.jar filter "(( CHROM has 9 ) & ( POS > 204854 ) & ( POS < 475259 ))" > MvG_SnpEff_SnpSift_GoNL_CADD_RecessiveD4_LowPopFreq_10kbDOCK8.vcf
