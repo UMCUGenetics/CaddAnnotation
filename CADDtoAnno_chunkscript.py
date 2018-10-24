@@ -72,7 +72,7 @@ def createShells(inputdb, chunk_path, outputfile, cadd_fields, queue, email, tim
                 chunkfile=files,
                 vcfname=files.split(".")[0]+"_CADDv1.3.vcf",
                 cadd_fields=' '.join(cadd_fields)
-            )
+            ))
             sh_script.close()
 
             # Creates a list with the job names (files) and conat names (including path).
